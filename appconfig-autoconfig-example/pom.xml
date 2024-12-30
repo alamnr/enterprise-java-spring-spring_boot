@@ -1,0 +1,96 @@
+<?xml version="1.0"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+
+    <groupId>info.ejava.examples.app</groupId>
+    <artifactId>appconfig-autoconfig-example</artifactId>
+    <version>6.1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+    <name>App::Config::Auto Configuration Example</name>
+
+    <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <spring.boot.version>3.4.0</spring.boot.version>
+    </properties>
+
+    <description>
+        This project provides an example of a simple Spring Boot Application
+        configured by a simple starter.
+    </description>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <!-- <artifactId>spring-boot-starter</artifactId> -->
+            <version>${spring.boot.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.36</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- this module has a concrete dependency on HelloStdOut -->
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>hello-service-stdout</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <!-- added to inspect env -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+            <version>${spring.boot.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <version>${spring.boot.version}</version>
+        </dependency>
+
+    </dependencies>
+    <profiles>
+        <profile> <!-- used for final end-to-end; latch out in very beginning -->
+            <id>with-starter</id>
+            <activation>
+                <property>
+                    <name>!no-starter</name>
+                </property>
+            </activation>
+            <dependencies>
+                <!-- takes care of initializing Hello Service for us to inject -->
+                <dependency>
+                    <groupId>${project.groupId}</groupId>
+                    <artifactId>hello-starter</artifactId>
+                    <version>${project.version}</version>
+                </dependency>
+            </dependencies>
+        </profile>
+    </profiles>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>3.4.0</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>repackage</goal>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>

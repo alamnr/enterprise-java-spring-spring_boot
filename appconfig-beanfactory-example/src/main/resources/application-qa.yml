@@ -1,0 +1,4 @@
+app:
+  audience: application.yml value
+  commonProperty: Common Property from application-qa.yml
+  qaProperty: qaProperty from application-qa.yml
