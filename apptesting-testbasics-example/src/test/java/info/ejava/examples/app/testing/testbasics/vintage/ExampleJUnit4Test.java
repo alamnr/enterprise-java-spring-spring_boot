@@ -31,6 +31,7 @@ public class ExampleJUnit4Test {
     @After
     public void tearDown() {
         log.info("tearDown");
+
     }
 
     @Test(expected = IllegalArgumentException.class)
