@@ -31,14 +31,13 @@ public class ExampleJUnit4Test {
     @After
     public void tearDown() {
         log.info("tearDown");
-
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void two_plus_two() {
         log.info("2+2 = 4");
         assertEquals(4, 2 + 2);
-        //throw new IllegalArgumentException("Just demonstrating an expected exception");
+        throw new IllegalArgumentException("Just demonstrating an expected exception");
     }
 
     @Test
