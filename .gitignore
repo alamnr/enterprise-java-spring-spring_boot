@@ -47,3 +47,8 @@ buildNumber.properties
 #vscode
 
 .vscode
+
+# nodejs
+
+node_modules
+package-lock.json
