@@ -80,8 +80,8 @@ public class AspectJAssertionsTest {
     //all
     @Test
     public void all() {
-        //Person p = beaver; //change to eddie to cause failures
-        Person p = eddie;
+        Person p = beaver; //change to eddie to cause failures
+        // Person p = eddie;
         SoftAssertions softly = new SoftAssertions();
         softly.assertThat(p.getFirstName()).isEqualTo("Jerry");
         softly.assertThat(p.getLastName()).isEqualTo("Mathers");
